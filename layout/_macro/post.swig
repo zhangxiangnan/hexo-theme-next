@@ -1,4 +1,4 @@
-{% macro render(post, is_index, post_extra_class) %}
+{% macro render(post, is_index, is_pv, post_extra_class) %}
 
   {% set headlessPost = Array.prototype.indexOf.call(['quote', 'picture'], post.type) > -1 %}
   {% set navlessPost = headlessPost %}
@@ -98,6 +98,12 @@
             {% endif %}
           {% endif %}
 
+		  {% if is_pv %}
+			 <span>&nbsp; | &nbsp;
+			 <span id="busuanzi_value_page_pv" ></span>次阅读
+			</span>    
+		  {% endif %}
+		  
           {% if not is_index and theme.facebook_sdk.enable and theme.facebook_sdk.like_button %}
             &nbsp; | &nbsp;
             <div class="fb-like" data-layout="button_count" data-share="true"></div>
@@ -121,6 +127,7 @@
               <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>{{ theme.busuanzi_count.page_pv_footer }}
               </span>
           {% endif %}
+		
         </div>
       </header>
     {% endif %}
